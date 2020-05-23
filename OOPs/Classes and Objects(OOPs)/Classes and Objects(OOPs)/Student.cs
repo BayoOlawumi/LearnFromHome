@@ -4,12 +4,16 @@ using System.Text;
 
 namespace Classes_and_Objects_OOPs_
 {
-    class Student
+    class Student: Human
     {
-        public string name;
+        
         public string matricNo;
         private double cgpa;
-        public string department;
+        public string department
+        {
+            get;set;
+        }
+
         public int level;
 
         public double CGPA
@@ -30,6 +34,7 @@ namespace Classes_and_Objects_OOPs_
         }
         public string classOfDegree()
         {
+            this.speechRate = 34;
             if(cgpa<=5.0 && cgpa>=4.5)
             {
                 return "First Class";

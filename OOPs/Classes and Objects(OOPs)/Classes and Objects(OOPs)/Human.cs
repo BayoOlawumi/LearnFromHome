@@ -11,8 +11,10 @@ namespace Classes_and_Objects_OOPs_
         public Human()
         {
             Console.WriteLine("You are welcome human being");
-            eyeNo = 2;
+            eyeNo = StaticExamples.currentVal;
             nose = 1;
+            name = "Human Being";
+            
         }
         public Human(string nameEntered)
         {
@@ -22,6 +24,7 @@ namespace Classes_and_Objects_OOPs_
         //This is a Field
         private string name;
         public int eyeNo;
+        protected double speechRate;
         public int nose;
 
         //This is a property
