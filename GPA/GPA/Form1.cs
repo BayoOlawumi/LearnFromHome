@@ -21,7 +21,36 @@ namespace GPA
         public double TotalUnit = 0;
         public double TotalLoad = 0;
         public double cgpa{ get; set; }
+        public Dictionary<char, int> FirstCourse = new Dictionary<char, int>();
+        public Dictionary<char, int> SecondCourse = new Dictionary<char, int>();
+        public Dictionary<char, int> ThirdCourse = new Dictionary<char, int>();
+        public Dictionary<char, int> FourthCourse = new Dictionary<char, int>();
+        public Dictionary<char, int> FifthCourse = new Dictionary<char, int>();
+        public Dictionary<char, int> SixthCourse = new Dictionary<char, int>();
         public List<Dictionary<char, double>> grade_loadList = new List<Dictionary<char, double>>();
+
+        /// <summary>
+        /// Clear values that needs to be reused
+        /// </summary>
+        public void ClearReusables()
+        {
+            //Empty the result
+            Result.Text = string.Empty;
+            //Clear Total Load
+            TotalLoad = 0;
+
+            //clear grade load List
+            grade_loadList = new List<Dictionary<char, double>>();
+
+             FirstCourse = new Dictionary<char, int>();
+             SecondCourse = new Dictionary<char, int>();
+             ThirdCourse = new Dictionary<char, int>();
+             FourthCourse = new Dictionary<char, int>();
+             FifthCourse = new Dictionary<char, int>();
+             SixthCourse = new Dictionary<char, int>();
+    }
+
+
         private void Calculate_Click(object sender, EventArgs e)
         {
             //Remember Try and exception class we had
@@ -39,20 +68,27 @@ namespace GPA
                 {
                     MessageBox.Show("Kindly check the Text Box(es), score(s) are missing");
                 }
+
+                else if(Fullname.Text==string.Empty || MatricNum.Text==string.Empty)
+                {
+                    MessageBox.Show("Fullname or Matric number is missing are missing");
+                }
                 else
                 {
                     fullname = Fullname.Text;
                     MatNum = MatricNum.Text;
 
+                    ClearReusables();
+
                     //Creation of non-generic collections for each course
                     //Having the grade as key and the point obtained based on the score as Value
                     //The score in every text box is passed into a function called gradeMaker
-                    Dictionary<char, int> FirstCourse = gradeMaker(Convert.ToInt32(Course1Score.Text));
-                    Dictionary<char, int> SecondCourse = gradeMaker(Convert.ToInt32(Course2Score.Text));
-                    Dictionary<char, int> ThirdCourse = gradeMaker(Convert.ToInt32(Course3Score.Text));
-                    Dictionary<char, int> FourthCourse = gradeMaker(Convert.ToInt32(Course4Score.Text));
-                    Dictionary<char, int> FifthCourse = gradeMaker(Convert.ToInt32(Course5Score.Text));
-                    Dictionary<char, int> SixthCourse = gradeMaker(Convert.ToInt32(Course6Score.Text));
+                    FirstCourse = gradeMaker(Convert.ToInt32(Course1Score.Text));
+                    SecondCourse = gradeMaker(Convert.ToInt32(Course2Score.Text));
+                    ThirdCourse = gradeMaker(Convert.ToInt32(Course3Score.Text));
+                    FourthCourse = gradeMaker(Convert.ToInt32(Course4Score.Text));
+                    FifthCourse = gradeMaker(Convert.ToInt32(Course5Score.Text));
+                    SixthCourse = gradeMaker(Convert.ToInt32(Course6Score.Text));
 
 
 
@@ -194,12 +230,15 @@ namespace GPA
             grade3.Text = grade4.Text = 
             grade5.Text = grade6.Text = string.Empty;
 
-            //Empty the result
-            Result.Text = string.Empty;
+          
 
             //Empty name and matric number
             Fullname.Text = MatricNum.Text = string.Empty;
+            ClearReusables();
 
         }
+       
+
+   
     }
 }
